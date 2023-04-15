@@ -82,7 +82,7 @@ export class FavoritesView extends Favorites {
 
   update() {
     this.removeAllTr();
-    this.toggleHaveFavorite();
+    
 
     this.entries.forEach((user) => {
       const row = this.CreateRow();
@@ -107,7 +107,8 @@ export class FavoritesView extends Favorites {
           this.delete(user);
         }
       };
-
+      
+      this.toggleHaveFavorite();
       this.tbody.append(row);
     });
   }
