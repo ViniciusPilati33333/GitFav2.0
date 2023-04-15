@@ -54,10 +54,6 @@ header {
     align-items: center;
 }
 
-#git-fav {
-    margin-right: 33rem;
-}
-
 button {
     font-family: var(--ff-text);
     background-color: var(--bg-btnfavorite);
@@ -204,7 +200,7 @@ tbody tr:nth-child(even) {
 .noneHaveFavorites {
     display: grid;
     grid-template-columns: 22rem 42rem;
-    margin-left: 34rem;
+    margin: 4rem 0 0 18rem;
 }
 
 .noneHaveFavorites h2 {
@@ -217,6 +213,7 @@ tbody tr:nth-child(even) {
 .hide {
     display: none;
 }
+
 
 
 
