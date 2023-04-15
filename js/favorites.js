@@ -82,6 +82,7 @@ export class FavoritesView extends Favorites {
 
   update() {
     this.removeAllTr();
+    this.toggleHaveFavorite();
 
     this.entries.forEach((user) => {
       const row = this.CreateRow();
@@ -138,13 +139,12 @@ export class FavoritesView extends Favorites {
   }
 
 
-  onAddLine() {
-    if (this.entries.length === 0) {
-      this.root.querySelector(".noneHaveFavorites").classList.remove("hide");
-    } else {
-      this.root.querySelector(".noneHaveFavorites").classList.add("hide");
-    }
-  }
-
+  toggleHaveFavorite() {
+     const noneHaveFavoriteDiv = this.root.querySelector('.noneHaveFavorites')
+     if (this.entries.length === 0) {
+      noneHaveFavoriteDiv.classList.remove("hide");
+     } else {
+       noneHaveFavoriteDiv.classList.add("hide");
+     }
+ }
 }
-
