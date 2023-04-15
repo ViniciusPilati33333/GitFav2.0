@@ -63,58 +63,58 @@ export class Favorites {
 
 // classe que vai criara  visualizaçao e eventos do html
 export class FavoritesView extends Favorites {
-    constructor(root) {
-        super(root)
-        this.tbody = this.root.querySelector("table tbody");
+  constructor(root) {
+    super(root);
+    this.tbody = this.root.querySelector("table tbody");
 
-        this.update()
-        this.onAdd()
-    }
+    this.update();
+    this.onAdd();
+  }
 
-    onAdd() {
-      const addButton = this.root.querySelector('.search button')
-      addButton.onclick = () => {
-        const { value } = this.root.querySelector('.search input')
+  onAdd() {
+    const addButton = this.root.querySelector(".search button");
+    addButton.onclick = () => {
+      const { value } = this.root.querySelector(".search input");
 
-        this.add(value)
-      }
-    }
+      this.add(value);
+    };
+  }
 
-    update() {
-        this.removeAllTr()
-        
-        this.entries.forEach((user) => {
-          const row = this.CreateRow()
+  update() {
+    this.removeAllTr();
 
-         row.querySelector('.user img').src = `https://github.com/${user.login}.png`
-        row.querySelector('.user img').alt = `Imagem de ${user.name}`
-        row.querySelector('.user p').textContent = user.name;
-        row.querySelector(".user a").href = `https://github.com/${user.login}`
+    this.entries.forEach((user) => {
+      const row = this.CreateRow();
 
-        row.querySelector(".user span").textContent = user.login;
-        row.querySelector('.repositories').textContent = user.public_repos
-        row.querySelector('.followers').textContent = user.followers
+      row.querySelector(
+        ".user img"
+      ).src = `https://github.com/${user.login}.png`;
+      row.querySelector(".user img").alt = `Imagem de ${user.name}`;
+      row.querySelector(".user p").textContent = user.name;
+      row.querySelector(".user a").href = `https://github.com/${user.login}`;
 
-         row.querySelector('.remove').onclick = () => {
-           const isOk = confirm('Tem certeza que deseja desfavoritar este usuário?')
+      row.querySelector(".user span").textContent = user.login;
+      row.querySelector(".repositories").textContent = user.public_repos;
+      row.querySelector(".followers").textContent = user.followers;
 
-           if(isOk){
-            this.delete(user)
-           }
+      row.querySelector(".remove").onclick = () => {
+        const isOk = confirm(
+          "Tem certeza que deseja desfavoritar este usuário?"
+        );
 
+        if (isOk) {
+          this.delete(user);
+        }
+      };
 
-         }
+      this.tbody.append(row);
+    });
+  }
 
-          this.tbody.append(row);
+  CreateRow() {
+    const tr = document.createElement("tr");
 
-        })
-      }
-
-    CreateRow() {
-        const tr = document.createElement('tr')
-
-
-        tr.innerHTML = `
+    tr.innerHTML = `
                     <td class="user">
                         <img src="http://github.com/maykbrito.png" alt="imagem maykbrito">
                         <a href="https://github.com/maykbrito" target="_blank">
@@ -126,46 +126,25 @@ export class FavoritesView extends Favorites {
                     <td class="followers">9589</td>
                     <td class="remove">Remover</td>
         
-        `
+        `;
 
-        return tr
-    }
-
-    removeAllTr() {
-
-        this.tbody.querySelectorAll("tr").forEach((tr) => {
-          tr.remove();
-        });
-    }
-
-
-    onAddLine() {
-      if (localStorage.getItem('@github-favorites2:') = '[]') {
-        this.root.querySelector('.noneHaveFavorites').classList.remove('hide')
-        
-      } 
-    }
-
-    noLine() {
-      if(localStorage.getItem("@github-favorites2:") !== "[]") {
-        this.root.querySelector('.noneHaveFavorites').classList.add('hide')
-
+    return tr;
   }
- }
 
-  } 
+  removeAllTr() {
+    this.tbody.querySelectorAll("tr").forEach((tr) => {
+      tr.remove();
+    });
+  }
 
 
-  
-  // const tableTbody = document.querySelector('.table tbody')
-  // const noneHaveFavoriteDiv = document.querySelector(".noneHaveFavorites");
+  onAddLine() {
+    if (this.entries.length === 0) {
+      this.root.querySelector(".noneHaveFavorites").classList.remove("hide");
+    } else {
+      this.root.querySelector(".noneHaveFavorites").classList.add("hide");
+    }
+  }
 
-  // function toggleNoneHaveFavorite() {
-  //   if (tableTbody.rows.length === 0) {
-  //     noneHaveFavoriteDiv.classList.remove("hide");
-  //   } else {
-  //     noneHaveFavoriteDiv.classList.add("hide");
-  //   }
-  // }
+}
 
-  // toggleNoneHaveFavorite();
